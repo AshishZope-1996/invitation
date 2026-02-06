@@ -189,36 +189,13 @@
 
         .slides {
             display: flex;
-            width: 400%;
-            animation: slide 20s infinite;
+            /* width handled automatically; JS will control movement for a smooth circular loop */
         }
 
         .slides img {
             width: 100%;
             object-fit: cover;
-        }
-
-        @keyframes slide {
-
-            0% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-100%);
-            }
-
-            50% {
-                transform: translateX(-200%);
-            }
-
-            75% {
-                transform: translateX(-300%);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
+            flex: 0 0 100%;
         }
 
 
@@ -771,6 +748,54 @@
             window.startFullSprinkle = startFullSprinkle;
             window.startFireworks = startFullSprinkle;
         })();
+
+            /* Circular slider: shift-first technique to create infinite loop without gaps */
+            function initCircularSlider() {
+                const slider = document.querySelector('.slider');
+                const slides = document.querySelector('.slides');
+                if (!slider || !slides) return;
+
+                let isMoving = false;
+                let interval = 3000;
+
+                function moveOnce() {
+                    if (isMoving) return;
+                    const first = slides.firstElementChild;
+                    if (!first) return;
+
+                    const slideWidth = slider.clientWidth;
+                    isMoving = true;
+                    slides.style.transition = 'transform 600ms ease';
+                    slides.style.transform = `translateX(-${slideWidth}px)`;
+
+                    const onEnd = () => {
+                        slides.removeEventListener('transitionend', onEnd);
+                        slides.style.transition = 'none';
+                        slides.appendChild(first);
+                        slides.style.transform = 'translateX(0)';
+                        // small timeout to re-enable transitions for the next move
+                        setTimeout(() => {
+                            slides.style.transition = '';
+                            isMoving = false;
+                        }, 20);
+                    };
+
+                    slides.addEventListener('transitionend', onEnd);
+                }
+
+                let timer = setInterval(moveOnce, interval);
+
+                // stop on hover to be friendly, resume on leave
+                slider.addEventListener('mouseenter', () => clearInterval(timer));
+                slider.addEventListener('mouseleave', () => timer = setInterval(moveOnce, interval));
+
+                // handle resize to ensure correct width
+                window.addEventListener('resize', () => {
+                    // no-op: widths are recalculated on each move
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initCircularSlider);
 
     </script>
 
