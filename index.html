@@ -479,6 +479,7 @@
         </div>
 
         <button class="openBtn" onclick="showPopup()">Open Special Message</button>
+        <button id="sprinkleToggle" class="openBtn" style="display:none;padding:10px 22px;margin-left:10px;font-size:15px;" onclick="startFullSprinkle()">Enable Sprinkles</button>
 
     </div>
 
@@ -526,7 +527,13 @@
 
                 startMusic();
 
-                startFullSprinkle();
+                // If device/connection is low-power, don't auto-start heavy animations.
+                if (window.isLowPower && window.isLowPower()) {
+                    const btn = document.getElementById('sprinkleToggle');
+                    if (btn) btn.style.display = 'inline-block';
+                } else {
+                    startFullSprinkle();
+                }
 
             }, 1000);
 
@@ -596,7 +603,24 @@
         }, 1000);
 
 
-        /* LIGHTWEIGHT CONFETTI (optimized) */
+        /* LIGHTWEIGHT CONFETTI / FULL SPRINKLE (optimized) */
+
+        // low-power detection helper
+        function isLowPower() {
+            try {
+                if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+                const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (conn && conn.effectiveType) {
+                    const slow = ['slow-2g','2g','3g'];
+                    if (slow.includes(conn.effectiveType)) return true;
+                }
+                if (navigator.deviceMemory && navigator.deviceMemory < 1.5) return true;
+                return false;
+            } catch (e) {
+                return false;
+            }
+        }
+        window.isLowPower = isLowPower;
 
         (function() {
             const canvas = document.getElementById('fireworksCanvas');
@@ -658,14 +682,19 @@
                 if (running) return;
                 running = true;
 
-                // spread bursts across the full width but keep counts moderate
-                const bursts = 6;
+                const low = window.isLowPower && window.isLowPower();
+                // scale parameters down for low-power devices
+                const bursts = low ? 2 : 6;
+                const perBurst = low ? 8 : 25;
+                const heartChance = low ? 0.08 : 0.25;
+                const delay = low ? 500 : 350;
+
                 for (let i = 0; i < bursts; i++) {
                     setTimeout(() => {
-                        const x = (i + Math.random()*0.6) / bursts * canvas.width;
-                        const y = Math.random() * canvas.height * 0.6 + 20;
-                        addBurst(x, y, 25, 0.25);
-                    }, i * 350);
+                        const x = (i + Math.random() * (low ? 0.9 : 0.6)) / bursts * canvas.width;
+                        const y = Math.random() * canvas.height * (low ? 0.5 : 0.6) + 20;
+                        addBurst(x, y, perBurst, heartChance);
+                    }, i * delay);
                 }
 
                 // run animation
