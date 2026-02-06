@@ -344,8 +344,8 @@
 
     <!-- PREMIUM MUSIC -->
 
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3">
+    <audio id="bgMusic" loop preload="none">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
     </audio>
 
 
@@ -389,10 +389,10 @@
 
             <div class="slides">
 
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
-                <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc">
+                <img loading="lazy" decoding="async" width="400" height="500" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=60">
+                <img loading="lazy" decoding="async" width="400" height="500" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=60">
+                <img loading="lazy" decoding="async" width="400" height="500" src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=60">
+                <img loading="lazy" decoding="async" width="400" height="500" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=60">
 
             </div>
 
@@ -435,7 +435,51 @@
         </div>
 
 
+        <!-- PREMIUM INVITATION SECTIONS -->
+        <div class="card">
+            <h2>Invitation</h2>
+            <p><b>Host:</b> Mr. &amp; Mrs. Rajesh Zope</p>
+            <p style="font-family: 'Great Vibes', cursive; font-size: 34px; margin:10px 0;">ASHISH ZOPE<br>with<br>MADHURI PATIL</p>
+            <p style="margin-top:8px;">With great joy and love, we invite you to celebrate the wedding of our beloved children.</p>
+            <p style="margin-top:6px;"><b>Wedding:</b> Saturday, 7 March 2026 | <b>Time:</b> 8:30 PM</p>
+        </div>
+
+        <div class="card">
+            <h2>Functions</h2>
+            <p><b>Haldi Ceremony:</b> 6 March 2026 | 10:00 AM</p>
+            <p><b>Mehendi:</b> 6 March 2026 | 4:00 PM</p>
+            <p><b>Wedding Ceremony:</b> 7 March 2026 | 8:30 PM</p>
+            <p><b>Reception:</b> 7 March 2026 | 10:00 PM onwards</p>
+        </div>
+
+        <div class="card">
+            <h2>Venue</h2>
+            <p><b>Jafar Lawns, Savda</b></p>
+            <p>Near ABC Chowk, Savda, Maharashtra</p>
+            <p>Landmark: Opposite City Mall</p>
+            <a href="https://maps.app.goo.gl/1YybRbZBQf4GUeXo7" target="_blank" class="mapBtn">Open Location in Google Maps</a>
+            <!-- <div style="margin-top:12px;">
+                <img alt="Maps QR" src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=https://maps.app.goo.gl/1YybRbZBQf4GUeXo7" style="border-radius:8px;" />
+            </div> -->
+        </div>
+
+        <div class="card">
+            <h2>RSVP</h2>
+            <p>Please confirm your attendance by <b>25 February 2026</b>.</p>
+            <p><b>Ashish:</b> +91 77440 46830</p>
+            <p><b>Madhuri:</b> +91 91234 56789</p>
+            <a href="https://wa.me/917744046830?text=Hello%20Ashish%20and%20Madhuri!%20I%20confirm%20my%20attendance." target="_blank" class="mapBtn">RSVP on WhatsApp</a>
+        </div>
+
+        <div class="card">
+            <h2>Notes & Guidance</h2>
+            <p>Dress Code: Traditional / Ethnic</p>
+            <p>Dinner to follow. Kindly avoid boxed gifts.</p>
+            <p>Your presence & blessings are the best gift.</p>
+        </div>
+
         <button class="openBtn" onclick="showPopup()">Open Special Message</button>
+        <button id="sprinkleToggle" class="openBtn" style="display:none;padding:10px 22px;margin-left:10px;font-size:15px;" onclick="startFullSprinkle()">Enable Sprinkles</button>
 
     </div>
 
@@ -457,9 +501,9 @@
 
     <!-- FLOAT PHOTOS -->
 
-    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486" class="floatPhoto" style="left:10%">
-    <img src="https://images.unsplash.com/photo-1519741497674-611481863552" class="floatPhoto" style="left:80%">
-    <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde" class="floatPhoto" style="left:50%">
+    <img loading="lazy" decoding="async" width="80" height="80" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=200&q=60" class="floatPhoto" style="left:10%">
+    <img loading="lazy" decoding="async" width="80" height="80" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=200&q=60" class="floatPhoto" style="left:80%">
+    <img loading="lazy" decoding="async" width="80" height="80" src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=200&q=60" class="floatPhoto" style="left:50%">
 
 
     <script>
@@ -483,7 +527,13 @@
 
                 startMusic();
 
-                startFireworks();
+                // If device/connection is low-power, don't auto-start heavy animations.
+                if (window.isLowPower && window.isLowPower()) {
+                    const btn = document.getElementById('sprinkleToggle');
+                    if (btn) btn.style.display = 'inline-block';
+                } else {
+                    startFullSprinkle();
+                }
 
             }, 1000);
 
@@ -553,80 +603,140 @@
         }, 1000);
 
 
-        /* PREMIUM FIREWORK */
+        /* LIGHTWEIGHT CONFETTI / FULL SPRINKLE (optimized) */
 
-        const canvas = document.getElementById("fireworksCanvas");
-
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particles = [];
-
-        function createFirework() {
-
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height / 2;
-
-            for (let i = 0; i < 80; i++) {
-
-                particles.push({
-
-                    x: x,
-                    y: y,
-                    angle: Math.random() * Math.PI * 2,
-                    speed: Math.random() * 6 + 2,
-                    life: 100
-
-                });
-
-            }
-
-        }
-
-        function startFireworks() {
-
-            for (let i = 0; i < 6; i++) {
-
-                setTimeout(createFirework, i * 400);
-
-            }
-
-            animateFireworks();
-
-        }
-
-        function animateFireworks() {
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach((p, index) => {
-
-                p.x += Math.cos(p.angle) * p.speed;
-                p.y += Math.sin(p.angle) * p.speed;
-
-                p.life--;
-
-                ctx.beginPath();
-
-                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-
-                ctx.fillStyle = "hsl(" + Math.random() * 360 + ",100%,60%)";
-
-                ctx.fill();
-
-                if (p.life <= 0) {
-
-                    particles.splice(index, 1);
-
+        // low-power detection helper
+        function isLowPower() {
+            try {
+                if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+                const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (conn && conn.effectiveType) {
+                    const slow = ['slow-2g','2g','3g'];
+                    if (slow.includes(conn.effectiveType)) return true;
                 }
+                if (navigator.deviceMemory && navigator.deviceMemory < 1.5) return true;
+                return false;
+            } catch (e) {
+                return false;
+            }
+        }
+        window.isLowPower = isLowPower;
 
+        (function() {
+            const canvas = document.getElementById('fireworksCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let running = false;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            // pause animation when tab is hidden
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) running = false;
             });
 
-            requestAnimationFrame(animateFireworks);
+            window.addEventListener('resize', resize);
+            resize();
 
-        }
+            function addParticle(x, y, opts = {}) {
+                const speed = opts.speed || (1 + Math.random() * 2);
+                const angle = (Math.random() * Math.PI * 2);
+                particles.push(Object.assign({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed * (0.3 + Math.random()),
+                    vy: Math.sin(angle) * speed * (0.3 + Math.random()) - (opts.upward?1:0),
+                    life: 40 + Math.floor(Math.random() * 40),
+                    age: 0,
+                    color: Math.floor(Math.random() * 360),
+                    type: opts.type || 'dot',
+                    size: opts.size || (opts.type === 'heart' ? 6 : 2.5)
+                }, opts));
+            }
+
+            function addBurst(x, y, count, heartChance=0.15) {
+                for (let i = 0; i < count; i++) {
+                    const isHeart = Math.random() < heartChance;
+                    addParticle(x + (Math.random()-0.5)*80, y + (Math.random()-0.5)*60, { type: isHeart ? 'heart' : 'dot', size: isHeart?8:2.8, upward: Math.random()>.5 });
+                }
+            }
+
+            function drawHeart(ctx, x, y, size, color, alpha) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.scale(size/10, size/10);
+                ctx.beginPath();
+                ctx.moveTo(0, -5);
+                ctx.bezierCurveTo(5, -18, 25, -10, 0, 18);
+                ctx.bezierCurveTo(-25, -10, -5, -18, 0, -5);
+                ctx.closePath();
+                ctx.fillStyle = `hsla(${color},90%,60%,${alpha})`;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function startFullSprinkle() {
+                if (running) return;
+                running = true;
+
+                const low = window.isLowPower && window.isLowPower();
+                // scale parameters down for low-power devices
+                const bursts = low ? 2 : 6;
+                const perBurst = low ? 8 : 25;
+                const heartChance = low ? 0.08 : 0.25;
+                const delay = low ? 500 : 350;
+
+                for (let i = 0; i < bursts; i++) {
+                    setTimeout(() => {
+                        const x = (i + Math.random() * (low ? 0.9 : 0.6)) / bursts * canvas.width;
+                        const y = Math.random() * canvas.height * (low ? 0.5 : 0.6) + 20;
+                        addBurst(x, y, perBurst, heartChance);
+                    }, i * delay);
+                }
+
+                // run animation
+                requestAnimationFrame(loop);
+            }
+
+            function loop() {
+                if (!running && particles.length === 0) return;
+                if (document.hidden) return; // pause when tab hidden
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.03; // gentle gravity
+                    p.age++;
+                    const alpha = Math.max(0, 1 - p.age / p.life);
+                    if (alpha <= 0) { particles.splice(i, 1); continue; }
+
+                    if (p.type === 'heart') {
+                        drawHeart(ctx, p.x, p.y, p.size, p.color, alpha);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                        ctx.fillStyle = `hsla(${p.color},90%,60%,${alpha})`;
+                        ctx.fill();
+                    }
+                }
+
+                if (particles.length > 0) {
+                    requestAnimationFrame(loop);
+                } else {
+                    running = false;
+                }
+            }
+
+            // expose functions globally
+            window.startFullSprinkle = startFullSprinkle;
+            window.startFireworks = startFullSprinkle;
+        })();
 
     </script>
 
