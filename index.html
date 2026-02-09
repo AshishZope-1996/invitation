@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
 
     <title>Wedding Invitation | Ashish ❤️ Madhuri</title>
 
@@ -432,12 +433,56 @@
 
         @media(max-width:600px) {
 
+            .popup {
+                width: 85vw;
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            .popup h2 {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+
+            .popup p {
+                font-size: 13px;
+                margin: 4px 0;
+            }
+
+            .closeBtn {
+                margin-top: 12px;
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+
             .names {
                 font-size: 38px;
             }
 
             .slider {
                 height: 350px;
+            }
+
+        }
+
+        @media(max-width:400px) {
+
+            .popup {
+                width: 90vw;
+                padding: 16px;
+            }
+
+            .popup h2 {
+                font-size: 20px;
+            }
+
+            .popup p {
+                font-size: 12px;
+            }
+
+            .closeBtn {
+                padding: 7px 18px;
+                font-size: 13px;
             }
 
         }
@@ -480,8 +525,10 @@
         <!-- FORMAL INVITATION HEADER -->
         <div class="card" style="margin-top:0;border-top: 3px solid gold;">
             <p style="font-size:12px; letter-spacing:2px;">WITH THE BLESSINGS OF THE ALMIGHTY</p>
-            <p style="margin:8px 0; font-size:14px;"><b>Mr. &amp; Mrs. Sunil Zope</b><br>request the honor of your presence<br>at the wedding ceremony of their son</p>
-            <p style="margin:8px 0; font-size:14px;"><b>Hemant Jawale &amp; Family</b><br>request the honor of your presence<br>at the wedding ceremony of their daughter</p>
+            <p style="margin:8px 0; font-size:14px;"><b>Mr. &amp; Mrs. Sunil Zope</b><br>request the honor of your
+                presence<br>at the wedding ceremony of their son</p>
+            <p style="margin:8px 0; font-size:14px;"><b>Hemant Jawale &amp; Family</b><br>request the honor of your
+                presence<br>at the wedding ceremony of their daughter</p>
         </div>
 
         <div class="names">
@@ -582,7 +629,8 @@
             <p><b>Airport:</b> Pune Airport (PNQ) - 45 km from venue</p>
             <p><b>Accommodation:</b> Recommended hotels nearby the venue</p>
             <p><b>Travel:</b> Cabs/Transport can be arranged on request</p>
-            <p style="margin-top:8px; opacity:0.8; font-size:13px;">For accommodation &amp; travel assistance, please contact Ashish.</p>
+            <p style="margin-top:8px; opacity:0.8; font-size:13px;">For accommodation &amp; travel assistance, please
+                contact Ashish.</p>
         </div>
 
         <!-- RSVP &amp; CONTACT -->
@@ -601,7 +649,8 @@
             <p>Dress Code: Traditional / Ethnic</p>
             <p>Dinner to follow. Kindly avoid boxed gifts.</p>
             <p>Your presence & blessings are the best gift.</p>
-            <p style="margin-top:8px; font-size:13px; font-style:italic;">&quot;Two souls, one heart, one love forever.&quot;</p>
+            <p style="margin-top:8px; font-size:13px; font-style:italic;">&quot;Two souls, one heart, one love
+                forever.&quot;</p>
         </div>
 
         <!-- CLOSING SECTION -->
@@ -636,7 +685,8 @@
     <!-- ENGAGEMENT TRAILER VIDEO MODAL -->
     <div class="videoModal" id="videoModal">
         <div class="videoModalContent">
-            <video id="engagementVideo" playsinline controls="false" autoplay controlsList="nodownload" oncontextmenu="return false">
+            <video id="engagementVideo" playsinline controls="false" autoplay controlsList="nodownload"
+                oncontextmenu="return false">
                 <source src="./Videos/engagement.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -657,11 +707,11 @@
         src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=200&q=60"
         class="floatPhoto" style="left:50%"> -->
 
-    <img loading="lazy" decoding="async" width="80" height="80" src="./Photos/Ashish_001.jpg" class="floatPhoto"
+    <img loading="lazy" decoding="async" width="80" height="80" src="./Photos/11.jpg" class="floatPhoto"
         style="left:10%">
-    <img loading="lazy" decoding="async" width="80" height="80" src="./Photos/Ashish_002.jpg" class="floatPhoto"
+    <img loading="lazy" decoding="async" width="80" height="80" src="./Photos/10.jpg" class="floatPhoto"
         style="left:80%">
-    <img loading="lazy" decoding="async" width="80" height="80" src="./Photos/Ashish_003.jpg" class="floatPhoto"
+    <img loading="lazy" decoding="async" width="80" height="80" src="./Photos/09.jpg" class="floatPhoto"
         style="left:50%">
 
     <script>
@@ -990,6 +1040,15 @@
         }
 
         document.addEventListener('DOMContentLoaded', initCircularSlider);
+
+        /* SERVICE WORKER - CACHING */
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(reg => {
+                console.log('Service Worker registered successfully:', reg);
+            }).catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
+        }
 
     </script>
 
