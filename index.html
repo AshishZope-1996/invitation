@@ -276,6 +276,110 @@
         }
 
 
+        /* VIDEO MODAL WINDOW */
+        .videoModal {
+            position: fixed;
+            bottom: 20px;
+            right: -400px;
+            width: 350px;
+            height: 400px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid gold;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            z-index: 1001;
+            transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .videoModal.showVideo {
+            right: 20px;
+        }
+
+        .videoModalHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid gold;
+        }
+
+        .videoModalHeader p {
+            font-size: 12px;
+            color: gold;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .videoModalControls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .videoModalBtn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px 8px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .videoModalBtn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: gold;
+        }
+
+        .videoModalContent {
+            flex: 1;
+            position: relative;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .videoModalContent video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media(max-width:600px) {
+            .videoModal {
+                bottom: auto;
+                right: auto;
+                top: -500px;
+                width: 90%;
+                height: 300px;
+                left: 5%;
+                border-radius: 10px;
+            }
+
+            .videoModal.showVideo {
+                right: auto;
+                top: 60px;
+            }
+        }
+
+        @media(max-width:400px) {
+            .videoModal {
+                width: 95%;
+                height: 280px;
+                left: 2.5%;
+            }
+
+            .videoModalContent video {
+                object-fit: contain;
+            }
+        }
+
         /* FLOAT PHOTOS */
 
         .floatPhoto {
@@ -504,6 +608,23 @@
 
     </div>
 
+    <!-- ENGAGEMENT TRAILER VIDEO MODAL -->
+    <div class="videoModal" id="videoModal">
+        <div class="videoModalHeader">
+            <p>Engagement Trailer</p>
+            <div class="videoModalControls">
+                <button class="videoModalBtn" id="muteBtn" onclick="toggleMute()" title="Mute/Unmute">🔊</button>
+                <button class="videoModalBtn" onclick="closeVideoModal()" title="Close">✕</button>
+            </div>
+        </div>
+        <div class="videoModalContent">
+            <video id="engagementVideo" playsinline controls="false" autoplay muted>
+                <source src="./Videos/engagement.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
 
     <!-- FLOAT PHOTOS -->
 
@@ -597,7 +718,54 @@
 
         function closePopup() {
             document.getElementById("popup").classList.remove("showPopup");
+            // Show video modal after popup closes
+            setTimeout(() => {
+                showVideoModal();
+            }, 600);
         }
+
+
+        /* VIDEO MODAL FUNCTIONS */
+
+        function showVideoModal() {
+            const videoModal = document.getElementById("videoModal");
+            const video = document.getElementById("engagementVideo");
+            if (videoModal) {
+                videoModal.classList.add("showVideo");
+                if (video) video.play();
+            }
+        }
+
+        function closeVideoModal() {
+            const videoModal = document.getElementById("videoModal");
+            const video = document.getElementById("engagementVideo");
+            if (videoModal) {
+                videoModal.classList.remove("showVideo");
+                if (video) video.pause();
+            }
+        }
+
+        function toggleMute() {
+            const video = document.getElementById("engagementVideo");
+            const muteBtn = document.getElementById("muteBtn");
+            if (video) {
+                video.muted = !video.muted;
+                if (muteBtn) {
+                    muteBtn.textContent = video.muted ? "🔇" : "🔊";
+                }
+            }
+        }
+
+        // Close video modal if user clicks outside (optional)
+        document.addEventListener('click', (e) => {
+            const videoModal = document.getElementById("videoModal");
+            if (videoModal && videoModal.classList.contains("showVideo")) {
+                // Only close on direct click of modal, not on children
+                if (e.target === videoModal) {
+                    closeVideoModal();
+                }
+            }
+        });
 
 
         /* COUNTDOWN */
