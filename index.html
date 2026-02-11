@@ -19,12 +19,32 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(218, 79, 103, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #f4a261 0%, #da4f67 100%);
         }
 
         body {
-            background: linear-gradient(135deg, #000, #111, #000);
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
             color: white;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         /* floating background */
@@ -57,48 +77,99 @@
             position: fixed;
             width: 100%;
             height: 100vh;
-            background: black;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 999;
             transition: 1s;
+            overflow: hidden;
+        }
+
+        #welcomeScreen::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(218, 79, 103, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+
+        #welcomeScreen::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(68, 157, 209, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            animation: floatOrb 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(30px, -30px);
+            }
         }
 
         #welcomeScreen h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 45px;
-            margin-bottom: 20px;
-            animation: fadeIn 2s;
+            font-size: 52px;
+            margin-bottom: 15px;
+            animation: fadeInScale 2.5s ease-out;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 50%, #f4d35e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            position: relative;
+            z-index: 10;
         }
 
         .openBtn {
-            padding: 15px 35px;
+            padding: 15px 40px;
             border: none;
-            background: white;
-            color: black;
-            font-size: 18px;
-            border-radius: 30px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 100%);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            transition: 0.4s;
-            margin-top: 15px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(218, 79, 103, 0.3);
+            position: relative;
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .openBtn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 20px white;
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 15px 40px rgba(218, 79, 103, 0.5);
         }
 
-        @keyframes fadeIn {
+        .openBtn:active {
+            transform: scale(0.98) translateY(0);
+        }
+
+        @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: scale(0.8) translateY(30px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
             }
         }
 
@@ -107,9 +178,11 @@
 
         .container {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             opacity: 0;
             transition: 2s;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .show {
@@ -144,33 +217,46 @@
 
         .names {
             font-family: 'Great Vibes', cursive;
-            font-size: 60px;
-            margin-top: 20px;
+            font-size: 62px;
+            margin-top: 25px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 50%, #f4d35e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: glow 3s infinite alternate;
+            font-weight: 700;
         }
 
         @keyframes glow {
             from {
-                text-shadow: 0 0 10px white;
+                filter: drop-shadow(0 0 8px rgba(218, 79, 103, 0.4));
             }
 
             to {
-                text-shadow: 0 0 30px gold;
+                filter: drop-shadow(0 0 20px rgba(244, 162, 97, 0.6));
             }
         }
 
         .date {
-            margin-top: 10px;
-            font-size: 20px;
-            opacity: 0.9;
+            margin-top: 12px;
+            font-size: 18px;
+            opacity: 0.95;
+            color: #e8d4f8;
+            font-weight: 500;
         }
 
         /* COUNTDOWN */
 
         .countdown {
-            margin-top: 15px;
-            font-size: 22px;
-            font-weight: bold;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            background: rgba(218, 79, 103, 0.1);
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(218, 79, 103, 0.3);
+            display: inline-block;
+            color: #f4a261;
         }
 
 
@@ -184,13 +270,19 @@
             margin-left: auto;
             margin-right: auto;
             overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(218, 79, 103, 0.3), 0 0 40px rgba(244, 162, 97, 0.1);
+            border: 1px solid rgba(244, 162, 97, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .slider:hover {
+            box-shadow: 0 25px 75px rgba(218, 79, 103, 0.4), 0 0 50px rgba(244, 162, 97, 0.2);
+            transform: translateY(-5px);
         }
 
         .slides {
             display: flex;
-            /* width handled automatically; JS will control movement for a smooth circular loop */
         }
 
         .slides img {
@@ -203,21 +295,54 @@
         /* CARD */
 
         .card {
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.05);
+            margin-top: 25px;
+            background: linear-gradient(135deg, rgba(218, 79, 103, 0.08) 0%, rgba(244, 162, 97, 0.05) 100%);
             backdrop-filter: blur(20px);
-            padding: 25px;
+            padding: 28px;
             border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(218, 79, 103, 0.12);
+            border: 1px solid rgba(244, 162, 97, 0.15);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(218, 79, 103, 0.2);
+            border-color: rgba(244, 162, 97, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
         }
 
         .card h2 {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #f4a261 0%, #f4d35e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .card p {
-            margin: 6px 0;
+            margin: 8px 0;
             opacity: 0.9;
+            line-height: 1.6;
         }
 
 
@@ -226,17 +351,28 @@
         .mapBtn {
             display: inline-block;
             margin-top: 15px;
-            padding: 12px 25px;
-            background: white;
-            color: black;
-            border-radius: 30px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 100%);
+            color: white;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 8px 25px rgba(218, 79, 103, 0.3);
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 13px;
         }
 
         .mapBtn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 12px 35px rgba(218, 79, 103, 0.4);
+        }
+
+        .mapBtn:active {
+            transform: scale(0.98) translateY(0);
         }
 
 
@@ -247,13 +383,17 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: black;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 0 50px white;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 25px 100px rgba(218, 79, 103, 0.3), 0 0 60px rgba(244, 162, 97, 0.1);
             text-align: center;
-            transition: 0.5s;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1000;
+            border: 1px solid rgba(244, 162, 97, 0.2);
+            max-width: 90%;
+            width: 450px;
+            backdrop-filter: blur(10px);
         }
 
         .popup.showPopup {
@@ -262,18 +402,39 @@
 
         .popup h2 {
             font-family: 'Great Vibes';
-            font-size: 35px;
-            margin-bottom: 10px;
+            font-size: 42px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 50%, #f4d35e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .popup p {
+            margin: 8px 0;
+            opacity: 0.9;
+            font-size: 15px;
         }
 
         .closeBtn {
-            margin-top: 15px;
-            padding: 10px 25px;
+            margin-top: 20px;
+            padding: 12px 30px;
             border: none;
-            background: white;
-            color: black;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 100%);
+            color: white;
+            border-radius: 50px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(218, 79, 103, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 13px;
+        }
+
+        .closeBtn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 12px 35px rgba(218, 79, 103, 0.4);
         }
 
 
@@ -284,16 +445,17 @@
             right: -400px;
             width: 350px;
             height: 400px;
-            background: rgba(0, 0, 0, 0.95);
-            border: 2px solid gold;
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+            background: rgba(0, 0, 0, 0.97);
+            border: 2px solid rgba(244, 162, 97, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(218, 79, 103, 0.4), 0 0 40px rgba(244, 162, 97, 0.2);
             z-index: 1001;
             transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             aspect-ratio: 16/9;
+            backdrop-filter: blur(10px);
         }
 
         .videoModal.showVideo {
@@ -306,12 +468,12 @@
             align-items: center;
             padding: 10px 15px;
             background: rgba(0, 0, 0, 0.8);
-            border-bottom: 1px solid gold;
+            border-bottom: 1px solid rgba(244, 162, 97, 0.4);
         }
 
         .videoModalHeader p {
             font-size: 12px;
-            color: gold;
+            color: #f4a261;
             margin: 0;
             font-weight: bold;
         }
@@ -333,8 +495,8 @@
         }
 
         .videoModalBtn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: gold;
+            background: rgba(244, 162, 97, 0.1);
+            color: #f4a261;
         }
 
         .videoModalContent {
@@ -344,36 +506,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 18px;
+            overflow: hidden;
         }
 
         .videoModalContent video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .videoCloseBtn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.6);
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 28px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: 0.3s;
-            z-index: 100;
-        }
-
-        .videoCloseBtn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: gold;
         }
 
         /* SKIP BUTTON & COUNTDOWN */
@@ -391,35 +531,26 @@
             pointer-events: auto;
         }
 
-        .skipCountdown {
-            font-size: 13px;
-            color: #fff;
-            text-align: center;
-            font-weight: bold;
-            min-width: 70px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 6px 10px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-        }
-
         .skipBtn {
-            padding: 10px 18px;
-            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            padding: 11px 22px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 100%);
             color: white;
             border: none;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 13px;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            box-shadow: 0 8px 20px rgba(218, 79, 103, 0.5);
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .skipBtn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+            transform: scale(1.12);
+            box-shadow: 0 12px 30px rgba(218, 79, 103, 0.7);
         }
 
         .skipBtn:active {
@@ -432,17 +563,18 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(135deg, #000, #1a1a1a);
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
             padding: 0;
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            border-radius: 25px;
+            box-shadow: 0 25px 100px rgba(218, 79, 103, 0.3), 0 0 60px rgba(244, 162, 97, 0.1);
             text-align: center;
-            transition: 0.5s;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 1002;
             width: 95%;
-            max-width: 340px;
+            max-width: 360px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(244, 162, 97, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .instagramPopup.showPopup {
@@ -453,17 +585,20 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 16px;
+            border-bottom: 1px solid rgba(244, 162, 97, 0.15);
+            background: linear-gradient(135deg, rgba(218, 79, 103, 0.08) 0%, rgba(244, 162, 97, 0.05) 100%);
         }
 
         .instagramProfilePic {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             overflow: hidden;
-            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            background: linear-gradient(135deg, #da4f67, #f4a261);
             flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(244, 162, 97, 0.2);
+            border: 2px solid rgba(244, 162, 97, 0.5);
         }
 
         .instagramProfilePic img {
@@ -476,103 +611,116 @@
             display: flex;
             justify-content: space-around;
             flex: 1;
-            margin-left: 16px;
+            margin-left: 20px;
         }
 
         .instagramStat {
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 50px;
+            min-width: 60px;
         }
 
         .instagramStat strong {
-            font-size: 16px;
-            color: white;
+            font-size: 18px;
+            color: #f4a261;
             display: block;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .instagramStat span {
-            font-size: 11px;
+            font-size: 12px;
             color: #aaa;
-            margin-top: 4px;
+            margin-top: 5px;
+            font-weight: 500;
         }
 
         .instagramBioSection {
-            padding: 12px 15px;
+            padding: 16px 16px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(244, 162, 97, 0.15);
         }
 
         .instagramBioSection h3 {
-            font-size: 15px;
-            margin: 0 0 4px 0;
-            color: white;
+            font-size: 16px;
+            margin: 0 0 6px 0;
+            color: #f4a261;
+            font-weight: 700;
         }
 
         .instagramBioSection p {
-            margin: 4px 0;
+            margin: 5px 0;
             font-size: 13px;
             color: #ddd;
+            line-height: 1.4;
         }
 
         .instagramActionSection {
             display: flex;
-            gap: 8px;
-            padding: 12px 15px;
+            gap: 10px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, rgba(244, 162, 97, 0.05) 0%, rgba(218, 79, 103, 0.05) 100%);
         }
 
         .instagramFollowBtn {
             flex: 1;
-            padding: 10px 16px;
-            background: linear-gradient(135deg, #405DE6, #5B51D8, #833AB4);
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #da4f67 0%, #f4a261 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.3s;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 8px 20px rgba(218, 79, 103, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .instagramFollowBtn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(64, 93, 230, 0.3);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 12px 30px rgba(218, 79, 103, 0.5);
+        }
+
+        .instagramFollowBtn:active {
+            transform: scale(0.98) translateY(0);
         }
 
         .instagramMessageBtn {
             flex: 1;
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
+            padding: 12px 18px;
+            background: rgba(244, 162, 97, 0.1);
+            color: #f4a261;
+            border: 1.5px solid rgba(244, 162, 97, 0.4);
+            border-radius: 12px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
+            font-weight: 700;
+            font-size: 14px;
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .instagramMessageBtn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(244, 162, 97, 0.2);
+            border-color: rgba(244, 162, 97, 0.6);
+            transform: translateY(-2px);
         }
 
-        /* MOBILE RESPONSIVE */
         @media(max-width:600px) {
             .videoModal {
                 bottom: auto;
                 right: auto;
-                top: -500px;
-                width: 90%;
-                height: 300px;
-                left: 5%;
-                border-radius: 10px;
+                top: 60px;
+                width: 85vw;
+                height: calc(85vw * 9 / 16);
+                left: 7.5%;
+                border-radius: 14px;
             }
 
             .videoModal.showVideo {
@@ -583,35 +731,56 @@
             .instagramPopup {
                 width: 90%;
                 max-width: 340px;
-                border-radius: 15px;
+                border-radius: 18px;
             }
 
             .instagramProfileHeader {
-                padding: 12px 12px;
+                padding: 14px 12px;
             }
 
             .instagramProfilePic {
-                width: 70px;
-                height: 70px;
+                width: 75px;
+                height: 75px;
             }
 
             .instagramProfileStats {
-                margin-left: 12px;
+                margin-left: 14px;
             }
 
             .instagramBioSection {
-                padding: 10px 12px;
+                padding: 12px 12px;
             }
 
             .instagramActionSection {
-                padding: 10px 12px;
-                gap: 6px;
+                padding: 12px 12px;
+                gap: 8px;
             }
 
             .instagramFollowBtn,
             .instagramMessageBtn {
-                font-size: 12px;
-                padding: 9px 12px;
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+
+            .names {
+                font-size: 42px;
+            }
+
+            .date {
+                font-size: 15px;
+            }
+
+            .slider {
+                height: 350px;
+            }
+
+            .card {
+                padding: 18px;
+                margin-top: 18px;
+            }
+
+            .card h2 {
+                font-size: 20px;
             }
         }
 
@@ -625,6 +794,36 @@
             .videoModalContent video {
                 object-fit: contain;
             }
+
+            .popup {
+                width: 90vw;
+                padding: 20px 16px;
+                max-width: 280px;
+            }
+
+            .popup h2 {
+                font-size: 24px;
+                margin-bottom: 6px;
+            }
+
+            .popup p {
+                font-size: 12px;
+                margin: 5px 0;
+            }
+
+            .closeBtn {
+                padding: 9px 20px;
+                font-size: 12px;
+                margin-top: 14px;
+            }
+
+            .names {
+                font-size: 34px;
+            }
+
+            .slider {
+                height: 300px;
+            }
         }
 
         /* FLOAT PHOTOS */
@@ -636,7 +835,8 @@
             border-radius: 50%;
             object-fit: cover;
             animation: floatPhoto 12s infinite linear;
-            opacity: 0.5;
+            opacity: 0.3;
+            box-shadow: 0 0 20px rgba(218, 79, 103, 0.3);
         }
 
         @keyframes floatPhoto {
@@ -649,64 +849,6 @@
             }
         }
 
-
-        /* MOBILE */
-
-        @media(max-width:600px) {
-
-            .popup {
-                width: 85vw;
-                padding: 20px;
-                max-width: 90%;
-            }
-
-            .popup h2 {
-                font-size: 24px;
-                margin-bottom: 8px;
-            }
-
-            .popup p {
-                font-size: 13px;
-                margin: 4px 0;
-            }
-
-            .closeBtn {
-                margin-top: 12px;
-                padding: 8px 20px;
-                font-size: 14px;
-            }
-
-            .names {
-                font-size: 38px;
-            }
-
-            .slider {
-                height: 350px;
-            }
-
-        }
-
-        @media(max-width:400px) {
-
-            .popup {
-                width: 90vw;
-                padding: 16px;
-            }
-
-            .popup h2 {
-                font-size: 20px;
-            }
-
-            .popup p {
-                font-size: 12px;
-            }
-
-            .closeBtn {
-                padding: 7px 18px;
-                font-size: 13px;
-            }
-
-        }
     </style>
 
 </head>
@@ -744,12 +886,10 @@
     <div class="container" id="mainContent">
 
         <!-- FORMAL INVITATION HEADER -->
-        <div class="card" style="margin-top:0;border-top: 3px solid gold;">
-            <p style="font-size:12px; letter-spacing:2px;">WITH THE BLESSINGS OF THE ALMIGHTY</p>
-            <p style="margin:8px 0; font-size:14px;"><b>Mr. &amp; Mrs. Sunil Zope</b><br>request the honor of your
-                presence<br>at the wedding ceremony of their son</p>
-            <p style="margin:8px 0; font-size:14px;"><b>Hemant Jawale &amp; Family</b><br>request the honor of your
-                presence<br>at the wedding ceremony of their daughter</p>
+        <div class="card" style="margin-top:0; border-top: 3px solid; border-image: linear-gradient(135deg, #da4f67 0%, #f4a261 100%) 1; background: linear-gradient(135deg, rgba(218, 79, 103, 0.1) 0%, rgba(244, 162, 97, 0.08) 100%);">
+            <p style="font-size:12px; letter-spacing:2px; color: #f4a261; font-weight: 700; text-transform: uppercase;">WITH THE BLESSINGS OF THE ALMIGHTY</p>
+            <p style="margin:12px 0; font-size:14px; line-height: 1.6;"><b>Mr. &amp; Mrs. Sunil Zope</b><br>request the honor of your presence<br>at the wedding ceremony of their son</p>
+            <p style="margin:12px 0; font-size:14px; line-height: 1.6;"><b>Hemant Jawale &amp; Family</b><br>request the honor of your presence<br>at the wedding ceremony of their daughter</p>
         </div>
 
         <div class="names">
@@ -765,7 +905,7 @@
 
 
         <!-- SLIDER -->
-        <div style="margin-top:20px; text-align:center; font-size:13px; color:#ccc;">Photo Gallery</div>
+        <div style="margin-top:20px; text-align:center; font-size:13px; color: #f4a261; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">📸 Photo Gallery</div>
 
         <div class="slider">
 
@@ -875,16 +1015,15 @@
         </div>
 
         <!-- CLOSING SECTION -->
-        <div style="margin-top:40px; margin-bottom:30px; text-align:center; font-size:13px; opacity:0.8;">
-            <p>Join us as we celebrate love, family, and togetherness.</p>
-            <p style="margin-top:6px; font-style:italic;">With warm regards,</p>
-            <p style="margin-top:6px; font-family:'Great Vibes', cursive; font-size:28px;">Ashish &amp; Madhuri</p>
+        <div style="margin-top: 45px; margin-bottom: 35px; text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(218, 79, 103, 0.08) 0%, rgba(244, 162, 97, 0.05) 100%); border-radius: 20px; border: 1px solid rgba(244, 162, 97, 0.15);">
+            <p style="font-size: 15px; color: #ddd; margin-bottom: 12px; line-height: 1.6;">Join us as we celebrate love, family, and togetherness.</p>
+            <p style="margin-top: 10px; font-style: italic; color: #aaa; font-size: 14px;">With warm regards,</p>
+            <p style="margin-top: 12px; font-family: 'Great Vibes', cursive; font-size: 32px; background: linear-gradient(135deg, #da4f67 0%, #f4a261 50%, #f4d35e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ashish & Madhuri</p>
         </div>
 
-        <button class="openBtn" onclick="showPopup()">Open Special Message</button>
+        <button class="openBtn" onclick="showPopup()" style="margin-top: 25px;">✨ Open Special Message</button>
         <button id="sprinkleToggle" class="openBtn"
-            style="display:none;padding:10px 22px;margin-left:10px;font-size:15px;" onclick="startFullSprinkle()">Enable
-            Sprinkles</button>
+            style="display:none; padding: 12px 28px; margin-left: 10px; font-size: 14px; margin-top: 25px;" onclick="startFullSprinkle()">🎉 Enable Sprinkles</button>
 
     </div>
 
