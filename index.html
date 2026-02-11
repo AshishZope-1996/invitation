@@ -247,6 +247,121 @@
 
         /* COUNTDOWN */
 
+        /* WEDDING CARD BLOCK */
+        .weddingCardBlock {
+            margin-top: 0;
+            background: linear-gradient(135deg, rgba(218, 79, 103, 0.15) 0%, rgba(244, 162, 97, 0.1) 100%);
+            padding: 35px 25px;
+            border-radius: 22px;
+            position: relative;
+            overflow: hidden;
+            border: 1.5px solid rgba(244, 162, 97, 0.25);
+            box-shadow: inset 0 0 40px rgba(218, 79, 103, 0.1), 0 15px 40px rgba(218, 79, 103, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .weddingCardBlock:hover {
+            transform: translateY(-5px);
+            box-shadow: inset 0 0 40px rgba(218, 79, 103, 0.15), 0 25px 60px rgba(218, 79, 103, 0.25);
+            border-color: rgba(244, 162, 97, 0.4);
+        }
+
+        .weddingCardDecorator {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(244, 162, 97, 0.5) 50%, transparent 100%);
+            position: relative;
+            margin: 0 0 20px 0;
+        }
+
+        .weddingCardDecorator::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #da4f67, #f4a261);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(244, 162, 97, 0.4);
+        }
+
+        .weddingCardDecoratorBottom {
+            margin: 20px 0 0 0;
+        }
+
+        .weddingCardBlessings {
+            font-size: 13px;
+            letter-spacing: 2.5px;
+            color: #f4a261;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0 0 20px 0;
+            animation: glowText 3s ease-in-out infinite;
+        }
+
+        @keyframes glowText {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(244, 162, 97, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(244, 162, 97, 0.6);
+            }
+        }
+
+        .weddingCardFloral {
+            font-size: 24px;
+            margin: 12px 0;
+            letter-spacing: 6px;
+            animation: floatFloral 3s ease-in-out infinite;
+        }
+
+        @keyframes floatFloral {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .weddingCardFamily {
+            margin: 20px 0;
+        }
+
+        .weddingCardFamilyGroup {
+            margin: 16px 0;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(244, 162, 97, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .weddingCardFamilyGroup:hover {
+            background: rgba(218, 79, 103, 0.2);
+            border-color: rgba(244, 162, 97, 0.4);
+            transform: scale(1.02);
+        }
+
+        .weddingCardDivider {
+            font-size: 20px;
+            margin: 16px 0;
+            opacity: 0.7;
+            animation: spinDivider 4s linear infinite;
+        }
+
+        @keyframes spinDivider {
+            0%, 100% {
+                transform: rotateY(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: rotateY(180deg);
+                opacity: 1;
+            }
+        }
+
         .countdown {
             margin-top: 20px;
             font-size: 16px;
@@ -569,16 +684,20 @@
             box-shadow: 0 25px 100px rgba(218, 79, 103, 0.3), 0 0 60px rgba(244, 162, 97, 0.1);
             text-align: center;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 1002;
+            z-index: 2000;
             width: 95%;
             max-width: 360px;
             overflow: hidden;
             border: 1px solid rgba(244, 162, 97, 0.2);
             backdrop-filter: blur(10px);
+            visibility: hidden;
+            opacity: 0;
         }
 
         .instagramPopup.showPopup {
             transform: translate(-50%, -50%) scale(1);
+            visibility: visible;
+            opacity: 1;
         }
 
         .instagramProfileHeader {
@@ -886,10 +1005,30 @@
     <div class="container" id="mainContent">
 
         <!-- FORMAL INVITATION HEADER -->
-        <div class="card" style="margin-top:0; border-top: 3px solid; border-image: linear-gradient(135deg, #da4f67 0%, #f4a261 100%) 1; background: linear-gradient(135deg, rgba(218, 79, 103, 0.1) 0%, rgba(244, 162, 97, 0.08) 100%);">
-            <p style="font-size:12px; letter-spacing:2px; color: #f4a261; font-weight: 700; text-transform: uppercase;">WITH THE BLESSINGS OF THE ALMIGHTY</p>
-            <p style="margin:12px 0; font-size:14px; line-height: 1.6;"><b>Mr. &amp; Mrs. Sunil Zope</b><br>request the honor of your presence<br>at the wedding ceremony of their son</p>
-            <p style="margin:12px 0; font-size:14px; line-height: 1.6;"><b>Hemant Jawale &amp; Family</b><br>request the honor of your presence<br>at the wedding ceremony of their daughter</p>
+        <div class="weddingCardBlock">
+            <div class="weddingCardDecorator weddingCardDecoratorTop"></div>
+            
+            <p class="weddingCardBlessings">✨ WITH THE BLESSINGS OF THE ALMIGHTY ✨</p>
+            
+            <div class="weddingCardFloral">🌹 💕 🌹</div>
+            
+            <div class="weddingCardFamily">
+                <div class="weddingCardFamilyGroup">
+                    <p style="font-weight: 700; font-size: 15px; color: #f4a261;">Mr. & Mrs. Sunil Zope</p>
+                    <p style="font-size: 13px; color: #ddd; line-height: 1.5; margin-top: 6px;">request the honor of your presence<br>at the wedding ceremony of their son</p>
+                </div>
+                
+                <div class="weddingCardDivider">💍</div>
+                
+                <div class="weddingCardFamilyGroup">
+                    <p style="font-weight: 700; font-size: 15px; color: #f4a261;">Hemant Jawale & Family</p>
+                    <p style="font-size: 13px; color: #ddd; line-height: 1.5; margin-top: 6px;">request the honor of your presence<br>at the wedding ceremony of their daughter</p>
+                </div>
+            </div>
+            
+            <div class="weddingCardFloral" style="margin-top: 16px;">🌹 💕 🌹</div>
+            
+            <div class="weddingCardDecorator weddingCardDecoratorBottom"></div>
         </div>
 
         <div class="names">
@@ -1211,7 +1350,11 @@
                 if (video) {
                     // Reset video
                     video.currentTime = 0;
-                    video.muted = false;
+                    video.muted = false; // Keep muted for autoplay reliability
+                    
+                    // Remove all previous event listeners
+                    video.removeEventListener('ended', videoEnded);
+                    video.removeEventListener('ended', handlePiPEnd);
                     
                     // Start video
                     const playPromise = video.play();
@@ -1221,11 +1364,13 @@
                         });
                     }
                     
-                    // Monitor video end
+                    // Add event listener for video end
                     video.addEventListener('ended', videoEnded, { once: true });
                     
                     // Auto-close video and show popup after 39 seconds
                     startVideoDurationTimer();
+                    
+                    console.log("Video modal shown, video started");
                 }
             }
         }
@@ -1252,35 +1397,39 @@
             videoSkipped = true;
             if (videoDurationTimer) clearInterval(videoDurationTimer);
 
-            // Remove event listener to prevent double trigger
+            // Remove all event listeners to prevent double trigger
             video.removeEventListener('ended', videoEnded);
+            video.removeEventListener('ended', handlePiPEnd);
 
             // Hide the main video modal
             videoModal.classList.remove("showVideo");
 
+            console.log("Video skipped, attempting PiP mode");
+
             // Try Picture-in-Picture mode
             if (document.pictureInPictureElement) {
                 // Already in PiP, just continue
+                console.log("Already in PiP mode");
                 video.play();
+                video.addEventListener('ended', handlePiPEnd, { once: true });
                 startVideoDurationTimer();
             } else if (video.requestPictureInPicture) {
                 video.requestPictureInPicture()
                     .then(() => {
                         console.log("Entered Picture-in-Picture mode");
                         video.play();
-                        startVideoDurationTimer();
-                        // Auto-exit PiP when video ends
                         video.addEventListener('ended', handlePiPEnd, { once: true });
+                        startVideoDurationTimer();
                     })
                     .catch((error) => {
                         console.log("PiP request failed:", error);
-                        // Fallback: just show instagram popup
-                        setTimeout(showInstagramPopup, 300);
+                        // Fallback: show instagram popup
+                        showInstagramPopup();
                     });
             } else {
-                console.log("PiP not supported");
-                // Fallback: just show instagram popup
-                setTimeout(showInstagramPopup, 300);
+                console.log("PiP not supported on this browser");
+                // Fallback: show instagram popup
+                showInstagramPopup();
             }
         }
 
@@ -1313,18 +1462,25 @@
         function videoEnded() {
             const video = document.getElementById("engagementVideo");
             
+            console.log("Video ended function called");
+            
             if (videoDurationTimer) clearInterval(videoDurationTimer);
+            
+            // Remove event listeners
+            video.removeEventListener('ended', videoEnded);
+            video.removeEventListener('ended', handlePiPEnd);
             
             // Exit PiP if active
             if (document.pictureInPictureElement) {
+                console.log("Exiting Picture-in-Picture mode");
                 document.exitPictureInPicture()
                     .then(() => {
-                        console.log("Exited PiP mode");
-                        showInstagramPopupDelayed();
+                        console.log("Exited PiP successfully");
+                        showInstagramPopup();
                     })
                     .catch(err => {
                         console.log("Exit PiP error:", err);
-                        showInstagramPopupDelayed();
+                        showInstagramPopup();
                     });
             } else {
                 // Close video modal if still open
@@ -1332,20 +1488,22 @@
                 if (videoModal && videoModal.classList.contains("showVideo")) {
                     videoModal.classList.remove("showVideo");
                 }
-                showInstagramPopupDelayed();
-            }
-        }
-
-        function showInstagramPopupDelayed() {
-            setTimeout(() => {
+                console.log("Showing Instagram popup directly");
                 showInstagramPopup();
-            }, 200);
+            }
         }
 
         function showInstagramPopup() {
             const popup = document.getElementById("instagramPopup");
+            console.log("Attempting to show Instagram popup", popup);
             if (popup) {
+                // Force reflow to ensure the change is applied
+                popup.classList.remove("showPopup");
+                void popup.offsetWidth; // Trigger reflow
                 popup.classList.add("showPopup");
+                console.log("Instagram popup should now be visible");
+            } else {
+                console.log("Instagram popup element not found!");
             }
         }
 
@@ -1353,6 +1511,7 @@
             const popup = document.getElementById("instagramPopup");
             if (popup) {
                 popup.classList.remove("showPopup");
+                console.log("Instagram popup closed");
             }
         }
 
