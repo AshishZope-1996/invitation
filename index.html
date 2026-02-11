@@ -376,6 +376,193 @@
             color: gold;
         }
 
+        /* SKIP BUTTON & COUNTDOWN */
+        .skipButtonContainer {
+            position: absolute;
+            bottom: 20px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 1;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .skipCountdown {
+            font-size: 13px;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            min-width: 70px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .skipBtn {
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .skipBtn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+        }
+
+        .skipBtn:active {
+            transform: scale(0.95);
+        }
+
+        /* INSTAGRAM POPUP */
+        .instagramPopup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #000, #1a1a1a);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+            text-align: center;
+            transition: 0.5s;
+            z-index: 1002;
+            width: 95%;
+            max-width: 340px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .instagramPopup.showPopup {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .instagramProfileHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .instagramProfilePic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+            flex-shrink: 0;
+        }
+
+        .instagramProfilePic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instagramProfileStats {
+            display: flex;
+            justify-content: space-around;
+            flex: 1;
+            margin-left: 16px;
+        }
+
+        .instagramStat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 50px;
+        }
+
+        .instagramStat strong {
+            font-size: 16px;
+            color: white;
+            display: block;
+            font-weight: 600;
+        }
+
+        .instagramStat span {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 4px;
+        }
+
+        .instagramBioSection {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .instagramBioSection h3 {
+            font-size: 15px;
+            margin: 0 0 4px 0;
+            color: white;
+        }
+
+        .instagramBioSection p {
+            margin: 4px 0;
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .instagramActionSection {
+            display: flex;
+            gap: 8px;
+            padding: 12px 15px;
+        }
+
+        .instagramFollowBtn {
+            flex: 1;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #405DE6, #5B51D8, #833AB4);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instagramFollowBtn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(64, 93, 230, 0.3);
+        }
+
+        .instagramMessageBtn {
+            flex: 1;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .instagramMessageBtn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
         /* MOBILE RESPONSIVE */
         @media(max-width:600px) {
             .videoModal {
@@ -391,6 +578,40 @@
             .videoModal.showVideo {
                 right: auto;
                 top: 60px;
+            }
+
+            .instagramPopup {
+                width: 90%;
+                max-width: 340px;
+                border-radius: 15px;
+            }
+
+            .instagramProfileHeader {
+                padding: 12px 12px;
+            }
+
+            .instagramProfilePic {
+                width: 70px;
+                height: 70px;
+            }
+
+            .instagramProfileStats {
+                margin-left: 12px;
+            }
+
+            .instagramBioSection {
+                padding: 10px 12px;
+            }
+
+            .instagramActionSection {
+                padding: 10px 12px;
+                gap: 6px;
+            }
+
+            .instagramFollowBtn,
+            .instagramMessageBtn {
+                font-size: 12px;
+                padding: 9px 12px;
             }
         }
 
@@ -685,12 +906,50 @@
     <!-- ENGAGEMENT TRAILER VIDEO MODAL -->
     <div class="videoModal" id="videoModal">
         <div class="videoModalContent">
-            <video id="engagementVideo" playsinline controls="false" autoplay controlsList="nodownload"
+            <video id="engagementVideo" playsinline controls="false" muted controlsList="nodownload"
                 oncontextmenu="return false">
                 <source src="./Videos/engagement.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <button class="videoCloseBtn" onclick="closeVideoModal()" title="Close Video">✕</button>
+            <div class="skipButtonContainer" id="skipContainer">
+                <button class="skipBtn" onclick="skipVideo()">⏩ Skip</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INSTAGRAM FOLLOW POPUP -->
+    <div class="instagramPopup" id="instagramPopup">
+        <div class="instagramProfileHeader">
+            <div class="instagramProfilePic">
+                <img src="./Photos/11.jpg" alt="Profile" loading="lazy">
+            </div>
+            <div class="instagramProfileStats">
+                <div class="instagramStat">
+                    <strong>892</strong>
+                    <span>Posts</span>
+                </div>
+                <div class="instagramStat">
+                    <strong>47.2K</strong>
+                    <span>Followers</span>
+                </div>
+                <div class="instagramStat">
+                    <strong>234</strong>
+                    <span>Following</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instagramBioSection">
+            <h3>madhu_and_ashu</h3>
+            <p>📸 Capturing Memories 💕</p>
+            <p style="font-size: 13px; opacity: 0.8;">Creating memories, capturing love.<br>07.03.2026 💍</p>
+        </div>
+        
+        <div class="instagramActionSection">
+            <a href="https://instagram.com/madhu_and_ashu" target="_blank" class="instagramFollowBtn">
+                Follow
+            </a>
+            <button class="instagramMessageBtn" onclick="closeInstagramPopup()">Close</button>
         </div>
     </div>
 
@@ -796,21 +1055,165 @@
 
         /* VIDEO MODAL FUNCTIONS */
 
+        let videoSkipped = false;
+        let videoSkipTimer = null;
+        let videoDurationTimer = null;
+        const VIDEO_DURATION = 39; // 39 seconds
+
         function showVideoModal() {
             const videoModal = document.getElementById("videoModal");
             const video = document.getElementById("engagementVideo");
+            
+            videoSkipped = false;
+            
             if (videoModal) {
                 videoModal.classList.add("showVideo");
-                if (video) video.play();
+                
+                if (video) {
+                    // Reset video
+                    video.currentTime = 0;
+                    video.muted = false;
+                    
+                    // Start video
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Video play error:", error);
+                        });
+                    }
+                    
+                    // Monitor video end
+                    video.addEventListener('ended', videoEnded, { once: true });
+                    
+                    // Auto-close video and show popup after 39 seconds
+                    startVideoDurationTimer();
+                }
             }
+        }
+
+        function startVideoDurationTimer() {
+            if (videoDurationTimer) clearInterval(videoDurationTimer);
+            
+            let elapsed = 0;
+            videoDurationTimer = setInterval(() => {
+                elapsed++;
+                if (elapsed >= VIDEO_DURATION) {
+                    clearInterval(videoDurationTimer);
+                    videoEnded();
+                }
+            }, 1000);
+        }
+
+        function skipVideo() {
+            const video = document.getElementById("engagementVideo");
+            const videoModal = document.getElementById("videoModal");
+            
+            if (!video || !videoModal) return;
+
+            videoSkipped = true;
+            if (videoDurationTimer) clearInterval(videoDurationTimer);
+
+            // Remove event listener to prevent double trigger
+            video.removeEventListener('ended', videoEnded);
+
+            // Hide the main video modal
+            videoModal.classList.remove("showVideo");
+
+            // Try Picture-in-Picture mode
+            if (document.pictureInPictureElement) {
+                // Already in PiP, just continue
+                video.play();
+                startVideoDurationTimer();
+            } else if (video.requestPictureInPicture) {
+                video.requestPictureInPicture()
+                    .then(() => {
+                        console.log("Entered Picture-in-Picture mode");
+                        video.play();
+                        startVideoDurationTimer();
+                        // Auto-exit PiP when video ends
+                        video.addEventListener('ended', handlePiPEnd, { once: true });
+                    })
+                    .catch((error) => {
+                        console.log("PiP request failed:", error);
+                        // Fallback: just show instagram popup
+                        setTimeout(showInstagramPopup, 300);
+                    });
+            } else {
+                console.log("PiP not supported");
+                // Fallback: just show instagram popup
+                setTimeout(showInstagramPopup, 300);
+            }
+        }
+
+        function handlePiPEnd() {
+            console.log("Video ended in PiP mode");
+            videoEnded();
         }
 
         function closeVideoModal() {
             const videoModal = document.getElementById("videoModal");
             const video = document.getElementById("engagementVideo");
+            
+            if (videoDurationTimer) clearInterval(videoDurationTimer);
+            
             if (videoModal) {
                 videoModal.classList.remove("showVideo");
-                if (video) video.pause();
+            }
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+                video.removeEventListener('ended', videoEnded);
+            }
+            
+            // Exit PiP if active
+            if (document.pictureInPictureElement) {
+                document.exitPictureInPicture().catch(err => console.log("Exit PiP error:", err));
+            }
+        }
+
+        function videoEnded() {
+            const video = document.getElementById("engagementVideo");
+            
+            if (videoDurationTimer) clearInterval(videoDurationTimer);
+            
+            // Exit PiP if active
+            if (document.pictureInPictureElement) {
+                document.exitPictureInPicture()
+                    .then(() => {
+                        console.log("Exited PiP mode");
+                        showInstagramPopupDelayed();
+                    })
+                    .catch(err => {
+                        console.log("Exit PiP error:", err);
+                        showInstagramPopupDelayed();
+                    });
+            } else {
+                // Close video modal if still open
+                const videoModal = document.getElementById("videoModal");
+                if (videoModal && videoModal.classList.contains("showVideo")) {
+                    videoModal.classList.remove("showVideo");
+                }
+                showInstagramPopupDelayed();
+            }
+        }
+
+        function showInstagramPopupDelayed() {
+            setTimeout(() => {
+                showInstagramPopup();
+            }, 200);
+        }
+
+        function showInstagramPopup() {
+            const popup = document.getElementById("instagramPopup");
+            if (popup) {
+                popup.classList.add("showPopup");
+            }
+        }
+
+        function closeInstagramPopup() {
+            const popup = document.getElementById("instagramPopup");
+            if (popup) {
+                popup.classList.remove("showPopup");
             }
         }
 
