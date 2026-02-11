@@ -565,16 +565,24 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(218, 79, 103, 0.4), 0 0 40px rgba(244, 162, 97, 0.2);
             z-index: 1001;
-            transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             aspect-ratio: 16/9;
             backdrop-filter: blur(10px);
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
         }
 
         .videoModal.showVideo {
             right: 20px;
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        
+            pointer-events: auto;
         }
 
         .videoModalHeader {
@@ -840,11 +848,19 @@
                 height: calc(85vw * 9 / 16);
                 left: 7.5%;
                 border-radius: 14px;
+                transition: opacity 0.3s ease, left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                opacity: 0;
+                pointer-events: none;
+                visibility: hidden;
             }
 
             .videoModal.showVideo {
                 right: auto;
                 top: 60px;
+                left: 7.5%;
+                opacity: 1;
+                pointer-events: auto;
+                visibility: visible;
             }
 
             .instagramPopup {
@@ -974,6 +990,20 @@
 
 <body>
 
+    <!-- ENSURE VIDEO MODAL IS HIDDEN ON PAGE LOAD -->
+    <script>
+        // Force video modal to be hidden immediately on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoModal = document.getElementById('videoModal');
+            if (videoModal) {
+                videoModal.classList.remove('showVideo');
+                videoModal.style.opacity = '0';
+                videoModal.style.pointerEvents = 'none';
+                videoModal.style.visibility = 'hidden';
+                console.log('Video modal forced hidden on page load');
+            }
+        });
+    </script>
 
     <!-- PREMIUM MUSIC -->
 
@@ -1256,29 +1286,42 @@
         /* OPEN INVITE */
 
         function openInvite() {
-
+            console.log("1. Opening invitation...");
             document.getElementById("welcomeScreen").style.opacity = "0";
 
             setTimeout(() => {
-
+                console.log("2. Welcome screen hidden (1s passed)");
                 document.getElementById("welcomeScreen").style.display = "none";
 
-                const main = document.getElementById("mainContent");
+                // Show main content after 3 seconds
+                setTimeout(() => {
+                    console.log("3. Showing main content (4s total passed)");
+                    const main = document.getElementById("mainContent");
+                    if (!main) {
+                        console.error("ERROR: mainContent element not found!");
+                        return;
+                    }
+                    main.classList.add("show");
+                    main.classList.add("cinematicReveal");
+                    console.log("4. Main content classes added");
+                    
+                    startMusic();
 
-                main.classList.add("show");
-                main.classList.add("cinematicReveal");
-
-                showPopup();
-
-                startMusic();
-
-                // If device/connection is low-power, don't auto-start heavy animations.
-                if (window.isLowPower && window.isLowPower()) {
-                    const btn = document.getElementById('sprinkleToggle');
-                    if (btn) btn.style.display = 'inline-block';
-                } else {
-                    startFullSprinkle();
-                }
+                    // If device/connection is low-power, don't auto-start heavy animations.
+                    if (window.isLowPower && window.isLowPower()) {
+                        const btn = document.getElementById('sprinkleToggle');
+                        if (btn) btn.style.display = 'inline-block';
+                    } else {
+                        startFullSprinkle();
+                    }
+                    
+                    // Show popup AFTER main content starts appearing (add a small delay to let main content animate in)
+                    setTimeout(() => {
+                        console.log("5. Showing popup (4.3s total passed)");
+                        showPopup();
+                    }, 300);
+                    
+                }, 3000); // 3 second delay
 
             }, 1000);
 
@@ -1319,13 +1362,21 @@
         /* POPUP */
 
         function showPopup() {
-            document.getElementById("popup").classList.add("showPopup");
+            const popup = document.getElementById("popup");
+            if (!popup) {
+                console.error("ERROR: popup element not found!");
+                return;
+            }
+            popup.classList.add("showPopup");
+            console.log("Popup shown");
         }
 
         function closePopup() {
+            console.log("6. Popup closed, preparing video modal...");
             document.getElementById("popup").classList.remove("showPopup");
             // Show video modal after popup closes
             setTimeout(() => {
+                console.log("7. Video modal should now show (600ms after popup close)");
                 showVideoModal();
             }, 600);
         }
@@ -1342,10 +1393,13 @@
             const videoModal = document.getElementById("videoModal");
             const video = document.getElementById("engagementVideo");
             
+            console.log("showVideoModal called | videoModal:", !!videoModal, "| video:", !!video);
+            
             videoSkipped = false;
             
             if (videoModal) {
                 videoModal.classList.add("showVideo");
+                console.log("showVideo class added to videoModal");
                 
                 if (video) {
                     // Reset video
@@ -1389,47 +1443,48 @@
         }
 
         function skipVideo() {
+            console.log("8. Skip button clicked!");
             const video = document.getElementById("engagementVideo");
             const videoModal = document.getElementById("videoModal");
             
-            if (!video || !videoModal) return;
+            if (!video || !videoModal) {
+                console.error("Video or modal not found!");
+                return;
+            }
 
             videoSkipped = true;
             if (videoDurationTimer) clearInterval(videoDurationTimer);
 
-            // Remove all event listeners to prevent double trigger
+            // Remove all event listeners
             video.removeEventListener('ended', videoEnded);
             video.removeEventListener('ended', handlePiPEnd);
 
-            // Hide the main video modal
+            // IMMEDIATELY hide the video modal
             videoModal.classList.remove("showVideo");
+            console.log("9. Video modal hidden, starting Picture-in-Picture...");
 
-            console.log("Video skipped, attempting PiP mode");
-
-            // Try Picture-in-Picture mode
-            if (document.pictureInPictureElement) {
-                // Already in PiP, just continue
-                console.log("Already in PiP mode");
-                video.play();
-                video.addEventListener('ended', handlePiPEnd, { once: true });
-                startVideoDurationTimer();
-            } else if (video.requestPictureInPicture) {
+            // Start PiP mode
+            if (video.requestPictureInPicture && !document.pictureInPictureElement) {
                 video.requestPictureInPicture()
                     .then(() => {
-                        console.log("Entered Picture-in-Picture mode");
-                        video.play();
+                        console.log("10. Picture-in-Picture started successfully!");
+                        video.play().catch(e => console.log("Play error:", e));
                         video.addEventListener('ended', handlePiPEnd, { once: true });
                         startVideoDurationTimer();
                     })
                     .catch((error) => {
-                        console.log("PiP request failed:", error);
-                        // Fallback: show instagram popup
-                        showInstagramPopup();
+                        console.log("11. PiP failed:", error);
+                        // If PiP fails, just show Instagram popup
+                        setTimeout(() => showInstagramPopup(), 500);
                     });
+            } else if (document.pictureInPictureElement) {
+                console.log("Already in PiP mode");
+                video.play().catch(e => console.log("Play error:", e));
+                video.addEventListener('ended', handlePiPEnd, { once: true });
+                startVideoDurationTimer();
             } else {
-                console.log("PiP not supported on this browser");
-                // Fallback: show instagram popup
-                showInstagramPopup();
+                console.log("11b. PiP not supported");
+                setTimeout(() => showInstagramPopup(), 500);
             }
         }
 
