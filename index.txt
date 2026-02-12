@@ -112,12 +112,9 @@
         }
 
         @keyframes floatOrb {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translate(0, 0);
             }
-
             50% {
                 transform: translate(30px, -30px);
             }
@@ -186,23 +183,10 @@
             transition: 2s;
             max-width: 700px;
             margin: 0 auto;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
         }
-
-        .container.show {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
 
         .show {
             opacity: 1;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
         }
 
         .cinematicReveal {
@@ -317,12 +301,9 @@
         }
 
         @keyframes glowText {
-
-            0%,
-            100% {
+            0%, 100% {
                 text-shadow: 0 0 10px rgba(244, 162, 97, 0.3);
             }
-
             50% {
                 text-shadow: 0 0 20px rgba(244, 162, 97, 0.6);
             }
@@ -336,12 +317,9 @@
         }
 
         @keyframes floatFloral {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: translateY(0px);
             }
-
             50% {
                 transform: translateY(-8px);
             }
@@ -374,13 +352,10 @@
         }
 
         @keyframes spinDivider {
-
-            0%,
-            100% {
+            0%, 100% {
                 transform: rotateY(0deg);
                 opacity: 0.7;
             }
-
             50% {
                 transform: rotateY(180deg);
                 opacity: 1;
@@ -580,7 +555,6 @@
 
         /* VIDEO MODAL WINDOW */
         .videoModal {
-
             position: fixed;
             bottom: 20px;
             right: -400px;
@@ -591,24 +565,16 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(218, 79, 103, 0.4), 0 0 40px rgba(244, 162, 97, 0.2);
             z-index: 1001;
-            transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+            transition: right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             aspect-ratio: 16/9;
             backdrop-filter: blur(10px);
-
-            /* ADD THESE */
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
         }
 
         .videoModal.showVideo {
             right: 20px;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
         }
 
         .videoModalHeader {
@@ -1001,6 +967,7 @@
                 transform: translateY(-100vh);
             }
         }
+
     </style>
 
 </head>
@@ -1040,29 +1007,27 @@
         <!-- FORMAL INVITATION HEADER -->
         <div class="weddingCardBlock">
             <div class="weddingCardDecorator weddingCardDecoratorTop"></div>
-
+            
             <p class="weddingCardBlessings">✨ WITH THE BLESSINGS OF THE ALMIGHTY ✨</p>
-
+            
             <div class="weddingCardFloral">🌹 💕 🌹</div>
-
+            
             <div class="weddingCardFamily">
                 <div class="weddingCardFamilyGroup">
                     <p style="font-weight: 700; font-size: 15px; color: #f4a261;">Mr. & Mrs. Sunil Zope</p>
-                    <p style="font-size: 13px; color: #ddd; line-height: 1.5; margin-top: 6px;">request the honor of
-                        your presence<br>at the wedding ceremony of their son</p>
+                    <p style="font-size: 13px; color: #ddd; line-height: 1.5; margin-top: 6px;">request the honor of your presence<br>at the wedding ceremony of their son</p>
                 </div>
-
+                
                 <div class="weddingCardDivider">💍</div>
-
+                
                 <div class="weddingCardFamilyGroup">
                     <p style="font-weight: 700; font-size: 15px; color: #f4a261;">Hemant Jawale & Family</p>
-                    <p style="font-size: 13px; color: #ddd; line-height: 1.5; margin-top: 6px;">request the honor of
-                        your presence<br>at the wedding ceremony of their daughter</p>
+                    <p style="font-size: 13px; color: #ddd; line-height: 1.5; margin-top: 6px;">request the honor of your presence<br>at the wedding ceremony of their daughter</p>
                 </div>
             </div>
-
+            
             <div class="weddingCardFloral" style="margin-top: 16px;">🌹 💕 🌹</div>
-
+            
             <div class="weddingCardDecorator weddingCardDecoratorBottom"></div>
         </div>
 
@@ -1079,9 +1044,7 @@
 
 
         <!-- SLIDER -->
-        <div
-            style="margin-top:20px; text-align:center; font-size:13px; color: #f4a261; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
-            📸 Photo Gallery</div>
+        <div style="margin-top:20px; text-align:center; font-size:13px; color: #f4a261; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">📸 Photo Gallery</div>
 
         <div class="slider">
 
@@ -1191,20 +1154,15 @@
         </div>
 
         <!-- CLOSING SECTION -->
-        <div
-            style="margin-top: 45px; margin-bottom: 35px; text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(218, 79, 103, 0.08) 0%, rgba(244, 162, 97, 0.05) 100%); border-radius: 20px; border: 1px solid rgba(244, 162, 97, 0.15);">
-            <p style="font-size: 15px; color: #ddd; margin-bottom: 12px; line-height: 1.6;">Join us as we celebrate
-                love, family, and togetherness.</p>
+        <div style="margin-top: 45px; margin-bottom: 35px; text-align: center; padding: 30px 20px; background: linear-gradient(135deg, rgba(218, 79, 103, 0.08) 0%, rgba(244, 162, 97, 0.05) 100%); border-radius: 20px; border: 1px solid rgba(244, 162, 97, 0.15);">
+            <p style="font-size: 15px; color: #ddd; margin-bottom: 12px; line-height: 1.6;">Join us as we celebrate love, family, and togetherness.</p>
             <p style="margin-top: 10px; font-style: italic; color: #aaa; font-size: 14px;">With warm regards,</p>
-            <p
-                style="margin-top: 12px; font-family: 'Great Vibes', cursive; font-size: 32px; background: linear-gradient(135deg, #da4f67 0%, #f4a261 50%, #f4d35e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-                Ashish & Madhuri</p>
+            <p style="margin-top: 12px; font-family: 'Great Vibes', cursive; font-size: 32px; background: linear-gradient(135deg, #da4f67 0%, #f4a261 50%, #f4d35e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Ashish & Madhuri</p>
         </div>
 
         <button class="openBtn" onclick="showPopup()" style="margin-top: 25px;">✨ Open Special Message</button>
         <button id="sprinkleToggle" class="openBtn"
-            style="display:none; padding: 12px 28px; margin-left: 10px; font-size: 14px; margin-top: 25px;"
-            onclick="startFullSprinkle()">🎉 Enable Sprinkles</button>
+            style="display:none; padding: 12px 28px; margin-left: 10px; font-size: 14px; margin-top: 25px;" onclick="startFullSprinkle()">🎉 Enable Sprinkles</button>
 
     </div>
 
@@ -1224,7 +1182,7 @@
     </div>
 
     <!-- ENGAGEMENT TRAILER VIDEO MODAL -->
-    <div class="videoModal" id="videoModal">
+    <!-- <div class="videoModal" id="videoModal">
         <div class="videoModalContent">
             <video id="engagementVideo" playsinline controls="false" muted controlsList="nodownload"
                 oncontextmenu="return false">
@@ -1235,7 +1193,7 @@
                 <button class="skipBtn" onclick="skipVideo()">⏩ Skip</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- INSTAGRAM FOLLOW POPUP -->
     <div class="instagramPopup" id="instagramPopup">
@@ -1258,13 +1216,13 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="instagramBioSection">
             <h3>madhu_and_ashu</h3>
             <p>📸 Capturing Memories 💕</p>
             <p style="font-size: 13px; opacity: 0.8;">Creating memories, capturing love.<br>07.03.2026 💍</p>
         </div>
-
+        
         <div class="instagramActionSection">
             <a href="https://instagram.com/madhu_and_ashu" target="_blank" class="instagramFollowBtn">
                 Follow
@@ -1383,21 +1341,21 @@
         function showVideoModal() {
             const videoModal = document.getElementById("videoModal");
             const video = document.getElementById("engagementVideo");
-
+            
             videoSkipped = false;
-
+            
             if (videoModal) {
                 videoModal.classList.add("showVideo");
-
+                
                 if (video) {
                     // Reset video
                     video.currentTime = 0;
                     video.muted = false; // Keep muted for autoplay reliability
-
+                    
                     // Remove all previous event listeners
                     video.removeEventListener('ended', videoEnded);
                     video.removeEventListener('ended', handlePiPEnd);
-
+                    
                     // Start video
                     const playPromise = video.play();
                     if (playPromise !== undefined) {
@@ -1405,13 +1363,13 @@
                             console.log("Video play error:", error);
                         });
                     }
-
+                    
                     // Add event listener for video end
                     video.addEventListener('ended', videoEnded, { once: true });
-
+                    
                     // Auto-close video and show popup after 39 seconds
                     startVideoDurationTimer();
-
+                    
                     console.log("Video modal shown, video started");
                 }
             }
@@ -1419,7 +1377,7 @@
 
         function startVideoDurationTimer() {
             if (videoDurationTimer) clearInterval(videoDurationTimer);
-
+            
             let elapsed = 0;
             videoDurationTimer = setInterval(() => {
                 elapsed++;
@@ -1433,7 +1391,7 @@
         function skipVideo() {
             const video = document.getElementById("engagementVideo");
             const videoModal = document.getElementById("videoModal");
-
+            
             if (!video || !videoModal) return;
 
             videoSkipped = true;
@@ -1483,9 +1441,9 @@
         function closeVideoModal() {
             const videoModal = document.getElementById("videoModal");
             const video = document.getElementById("engagementVideo");
-
+            
             if (videoDurationTimer) clearInterval(videoDurationTimer);
-
+            
             if (videoModal) {
                 videoModal.classList.remove("showVideo");
             }
@@ -1494,7 +1452,7 @@
                 video.currentTime = 0;
                 video.removeEventListener('ended', videoEnded);
             }
-
+            
             // Exit PiP if active
             if (document.pictureInPictureElement) {
                 document.exitPictureInPicture().catch(err => console.log("Exit PiP error:", err));
@@ -1503,15 +1461,15 @@
 
         function videoEnded() {
             const video = document.getElementById("engagementVideo");
-
+            
             console.log("Video ended function called");
-
+            
             if (videoDurationTimer) clearInterval(videoDurationTimer);
-
+            
             // Remove event listeners
             video.removeEventListener('ended', videoEnded);
             video.removeEventListener('ended', handlePiPEnd);
-
+            
             // Exit PiP if active
             if (document.pictureInPictureElement) {
                 console.log("Exiting Picture-in-Picture mode");
@@ -1556,17 +1514,6 @@
                 console.log("Instagram popup closed");
             }
         }
-
-        const video = document.getElementById("engagementVideo");
-        const instagramPopup = document.getElementById("instagramPopup");
-
-        /* When PiP is CLOSED → show Instagram popup immediately */
-        video.addEventListener("leavepictureinpicture", () => {
-
-            /* show popup instantly */
-            instagramPopup.classList.add("showPopup");
-
-        });
 
         function toggleMute() {
             const video = document.getElementById("engagementVideo");
