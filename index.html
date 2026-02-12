@@ -186,10 +186,23 @@
             transition: 2s;
             max-width: 700px;
             margin: 0 auto;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
+
+        .container.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
 
         .show {
             opacity: 1;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
         .cinematicReveal {
